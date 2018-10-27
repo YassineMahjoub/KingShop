@@ -1,38 +1,35 @@
-client.on('message', message => {
-              if(!message.channel.guild) return;
-    if(message.content.startsWith('^bc')) {
-    if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-  if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
-    let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-    let copy = "SkelBot";
-    let request = `Requested By ${message.author.username}`;
-    if (!args) return message.reply('**bc*');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
-    msg.react('✅')
-    .then(() => msg.react('❌'))
-    .then(() =>msg.react('✅'))
-
-    let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-    let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-       let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-    let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-    reaction1.on("collect", r => {
-    message.channel.send(`☑ |   ${message.guild.members.size} يتم أرسال البرودكاست الى عضو `).then(m => m.delete(5000));
-    message.guild.members.forEach(m => {
-    var bc = new
-       Discord.RichEmbed()
-       .setColor('RANDOM')
-       .setTitle('البرودكاست') .addField('السيرفر', message.guild.name) .addField('المرسل', message.author.username)
-       .addField('الرساله', args)
-       .setThumbnail(message.author.avatarURL)
-       .setFooter(copy, client.user.avatarURL);
-    m.send({ embed: bc })
-    msg.delete();
-    })
-    })
-    reaction2.on("collect", r => {
-    message.channel.send(`**تم الغاء البرودكاست**`).then(m => m.delete(5000));
-    msg.delete();
-    })
-    })
-    }
-    })
+{
+  "name": "Heroku",
+  "version": "2.1.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "ascii-data-table": "^2.1.1",
+    "canvas": "^1.6.11",
+    "dateformat": "^3.0.3",
+    "discord.js": "^11.3.2",
+    "express": "^4.16.3",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "fs": "0.0.2",
+    "get-youtube-id": "^1.0.0",
+    "jimp": "^0.2.28",
+    "moment": "^2.22.1",
+    "ms": "^2.1.1",
+    "opusscript": "0.0.6",
+    "quick.db": "^6.2.0",
+    "request": "^2.85.0",
+    "simple-youtube-api": "^5.0.2",
+    "snekfetch": "^3.6.4",
+    "sqlite": "^2.9.1",
+    "sqlite3": "^4.0.0",
+    "youtube-info": "^1.2.0",
+    "ytdl-core": "^0.20.3"
+  },
+  "engines": {
+    "node": "8.4.0"
+  }
+}
